@@ -3,5 +3,5 @@ title: "About"
 permalink: /about/
 ---
 
-Been Extremely Obsessed to research on topics from Red Teaming, Cryptography and Low-Level System Security Stuffs. Leading DEFCON Chennai DCG602028 Chapter with OWASP Trichy and Team PPoPL. 
+Information Security Researcher with 6+ years of research experience. Area's of Interest and Expertise Covers Offensive Security, Red Teaming, API Penetration Testing, Cloud & Infrastructure Security, Reverse Engineering, Exploit Development/Vulnerability Research, and Low-Level System Security. Lead's at DEFCON Chennai DC602028 Chapter, OWASP Trichy Chapter and Team PPoPL. 
 
