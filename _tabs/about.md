@@ -4,5 +4,4 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+Athis SN, aka apt0xp3nda19, is an Offensive Security Researcher with 7+ years of experience in Information Security. Areas of Interest & Expertise follow - Red Team Operations, Adversary Emulation/Simulation, Malware Analysis, & Exploit Development. Athis SN is also the head of DEF CON Chennai (DCG9144) and serves as a core member at BSides Chennai.
