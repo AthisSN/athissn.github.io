@@ -19,11 +19,11 @@ title: apt0xp3nda19 # the main title
 tagline: Red Team Operations, MalDev, Malware Reverse Engineering & Exploit-Development # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+   Offensive Security & ow-Level System Security
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: ""
+url: "https://athissn.github.io"
 
 github:
   username: AthisSN # change to your GitHub username
@@ -88,7 +88,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: # [light | dark]
+theme_mode: dark
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
