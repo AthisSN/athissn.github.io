@@ -17,11 +17,13 @@ These high-footprint behaviors made traditional post-exploitation a prime target
 
 ## The Paradigm Shift Introduced by BOFs
 
-The introduction of Beacon Object Files fundamentally altered this operational landscape. BOFs allowed operators to execute post-exploitation tasks directly within the existing Beacon agent process, entirely in memory, without spawning child processes or writing artifacts to disk.
+The introduction of Beacon Object Files fundamentally altered this operational landscape, making its highly anticipated debut in Cobalt Strike version 4.1, released in the summer of 2020. Prior to this specific release, operators were constrained by the noisy execution methods previously mentioned.
 
-By leveraging a lightweight, position-independent object file format, red teams could perform complex tasks with a fraction of the memory footprint and telemetry generation of traditional Portable Executable files. This paradigm shift moved the focus from running a standalone binary to executing a targeted, isolated function.
+With the arrival of version 4.1, BOFs allowed operators to execute post-exploitation tasks directly within the existing Beacon agent process, entirely in memory, without spawning child processes or writing artifacts to disk. 
 
-This evolution drastically reduced the observable attack surface. It forced defenders to look deeper into process memory, API call patterns, and thread behavior, rather than relying solely on process creation events. This marked a new era of in-memory post-exploitation that required a more sophisticated approach to detection engineering.
+By leveraging a lightweight, position-independent object file format, red teams could suddenly perform complex tasks with a fraction of the memory footprint and telemetry generation of traditional Portable Executable files. This paradigm shift moved the focus from running a standalone binary to executing a targeted, isolated function. 
+
+This evolution drastically reduced the observable attack surface, forcing defenders to look deeper into process memory, API call patterns, and thread behavior rather than relying solely on process creation events, ultimately marking the beginning of a new era in stealthy, in-memory post-exploitation.
 
 ## Understanding BOFs and COFF Internals
 
