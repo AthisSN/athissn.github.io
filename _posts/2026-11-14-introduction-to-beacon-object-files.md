@@ -130,6 +130,16 @@ This ensures that if the agent is x64 or x86, the correct compiled object file i
 
 Finally, the script groups the command using ax.create_commands_group and registers it specifically for beacon agents running on Windows platforms. This ensures the command only appears in the operator interface when it is contextually relevant and supported by the target environment.
 
+### Execution
+
+With the AxScript written and the BOF compiled, the final step is to integrate and execute the payload within the Adaptix environment. To begin this process, open the Adaptix Console and navigate to the Script Manager feature. This interface allows operators to dynamically load and manage custom extensions without restarting the framework. By importing the newly created AxScript file, the framework parses the metadata and registers the custom commands defined within the script.
+
+Assuming a beacon session has already been established within your local lab environment, the next objective is to verify that the extension was loaded correctly. Within the Adaptix console, you can utilize the native help command to list all available commands for the active session. Scrolling through the output, you will see the hello_bof command listed alongside its description, confirming that the script was successfully parsed and the command is now available for execution.
+
+With the command verified, you can now execute it by simply typing hello_bof into the console. The Adaptix client will intercept the command, trigger the pre-hook we defined earlier, dynamically resolve the correct architecture-specific object file, and pass the execution task to the beacon. If the compilation and scripting were performed correctly, the console will immediately display the output, successfully printing the Hello Beacon message directly from the agent process.
+
+This successful execution validates the entire pipeline, from writing the C code and compiling the COFF object file to scripting the automation layer and executing it in memory. While this serves as a highly simplistic and foundational example of a custom BOF, it demonstrates the core mechanics of in-memory execution. In the upcoming articles, we will deep dive into writing more complex and custom BOFs, exploring advanced situational awareness techniques, and detailing how to perform various offensive operations while maintaining a minimal footprint.
+
 ## Situational Awareness and the TrustedSec Repository
 
 The true power of BOFs is realized in community-driven repositories that provide ready-to-use, lightweight capabilities. Situational awareness is the critical post-exploitation phase where an operator gathers information about the system, users, processes, and network to determine the next logical steps.
