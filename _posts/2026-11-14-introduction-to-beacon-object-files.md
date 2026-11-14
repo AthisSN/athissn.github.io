@@ -1,10 +1,8 @@
-
-
 ---
 title: "Introduction to Beacon Object Files: Internals and Weaponizing Your First BOF"
 date: 2026-11-14 20:00:00 +0530
-categories: [MalDev]
-tags: [bof, beacon-object-files, cobalt-strike, windows-internals, red-teaming]
+categories: ["MalDev"]
+tags: ["bof", "beacon-object-files", "cobalt-strike", "windows-internals", "red-teaming"]
 description: "An introduction to Beacon Object Files, COFF internals, argument parsing, and BOF development."
 ---
 
