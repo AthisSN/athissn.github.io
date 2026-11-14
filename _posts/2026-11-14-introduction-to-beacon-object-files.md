@@ -5,6 +5,8 @@ categories: ["MalDev"]
 tags: ["bof", "beacon-object-files", "cobalt-strike", "windows-internals", "red-teaming"]
 ---
 
+![Introduction](/assets/posts/intro.png)
+
 ## The Pre-BOF Era in Red Teaming
 
 Before the widespread adoption of Beacon Object Files (BOFs), red team engagements and advanced threat actors relied heavily on traditional execution methods to achieve post-exploitation objectives.
@@ -28,6 +30,8 @@ This evolution drastically reduced the observable attack surface, forcing defend
 ## Understanding BOFs and COFF Internals
 
 To truly understand how a BOF operates, one must first understand the Common Object File Format (COFF). In Windows development, when a C or C++ source file is compiled, it is not immediately turned into a standalone executable. Instead, it is compiled into an object file using the COFF format.
+
+![COFF](/assets/posts/coff-object.png)
 
 A COFF file contains a header, section headers, and relocation tables. The section headers define areas such as the `.text` section for executable code, the `.data` section for initialized variables, and the `.bss` section for uninitialized data. The relocation tables tell the linker how to adjust memory addresses once the final memory layout is determined.
 
