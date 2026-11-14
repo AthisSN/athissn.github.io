@@ -136,7 +136,7 @@ Finally, the script groups the command using ax.create_commands_group and regist
 
 With the AxScript written and the BOF compiled, the final step is to integrate and execute the payload within the Adaptix environment. To begin this process, open the Adaptix Console and navigate to the Script Manager feature. This interface allows operators to dynamically load and manage custom extensions without restarting the framework. By importing the newly created AxScript file, the framework parses the metadata and registers the custom commands defined within the script.
 
-![Script Manager](https://github.com/AthisSN/athissn.github.io/tree/main/assets/posts/Script-Manager.png)
+![Script Manager](/assets/posts/Script-Manager.png)
 
 Assuming a beacon session has already been established within your local lab environment, the next objective is to verify that the extension was loaded correctly. Within the Adaptix console, you can utilize the native help command to list all available commands for the active session. 
 
