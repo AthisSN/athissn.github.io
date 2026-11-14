@@ -50,7 +50,7 @@ Normally, a linker combines these object files and resolves all dependencies to 
 
 ## Windows APIs and Beacon Argument Parsing
 
-Windows APIs are the fundamental building blocks for interacting with the operating system. Take, for example, the `CreateFile` API, which is used to create or open files, named pipes, or devices. In a standard C program, `CreateFile` is called with multiple explicit parameters, including the file path, desired access, share mode, security attributes, creation disposition, and flags.
+Windows APIs are the fundamental building blocks for interacting with the operating system. Take, for example, the CreateFileA API, which is used to create or open files, named pipes, or communication devices (as detailed in the official Microsoft documentation: https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea). In a standard C program, CreateFileA is called with multiple explicit parameters, including the file path, desired access, share mode, security attributes, creation disposition, and flags.
 
 A BOF cannot rely on the standard C runtime or conventional `argc` and `argv` argument passing, as it is not a standalone executable with a `main` function. Instead, arguments are packed by the operator on the team server into a contiguous binary buffer.
 
