@@ -13,6 +13,8 @@ Before the widespread adoption of Beacon Object Files (BOFs), red team engagemen
 
 The standard operational procedure often involved spawning child processes, such as `cmd.exe` or `powershell.exe`, to run native commands or custom scripts. While effective, this approach generated substantial telemetry. Process creation events, command-line arguments, and PowerShell script block logging provided defenders with clear, easily analyzable traces of malicious activity.
 
+![Pre-BOF](/assets/posts/prebof.png)
+
 When operators sought to avoid process spawning, they frequently turned to reflective DLL injection. This technique allowed for the execution of custom code entirely in memory without touching the disk. However, reflective loaders typically required allocating large, suspicious Read-Write-Execute memory regions and creating anomalous threads within the host process.
 
 These high-footprint behaviors made traditional post-exploitation a prime target for Endpoint Detection and Response (EDR) systems. Red teams and threat actors were constantly forced to play a game of cat-and-mouse, attempting to obfuscate their payloads while defenders continuously refined their heuristics to catch these noisy, easily identifiable patterns.
@@ -25,7 +27,7 @@ With the arrival of version 4.1, BOFs allowed operators to execute post-exploita
 
 By leveraging a lightweight, position-independent object file format, red teams could suddenly perform complex tasks with a fraction of the memory footprint and telemetry generation of traditional Portable Executable files. This paradigm shift moved the focus from running a standalone binary to executing a targeted, isolated function. 
 
-![BOF Confirmation](/assets/posts/prebof.png)
+![In-Process](/assets/posts/inproc.png)
 
 This evolution drastically reduced the observable attack surface, forcing defenders to look deeper into process memory, API call patterns, and thread behavior rather than relying solely on process creation events, ultimately marking the beginning of a new era in stealthy, in-memory post-exploitation.
 
@@ -130,6 +132,7 @@ cmd_hello.setPreHook(function (id, cmdline, parsed_json, ...parsed_lines) {
 var group_hello = ax.create_commands_group("HelloBOF", [cmd_hello]);
 ax.register_commands_group(group_hello, ["beacon"], ["windows"], []);
 ```
+
 
 The metadata object defines the script identity, providing a name and description that the Adaptix client uses to catalog and display the extension to the operator.
 The ax.create_command function initializes a new command named hello_bof. This is the exact command the operator will type into the Adaptix console to trigger the action.
