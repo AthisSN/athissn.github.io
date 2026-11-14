@@ -98,11 +98,41 @@ The `-Os` flag optimizes the binary for size, while the `-c` flag ensures the co
 
 The resulting `hello.o` file is a COFF object file. Its compatibility with a particular Beacon loader depends on the architecture, symbols, relocations, and Beacon API requirements.
 
+### Integrating BOFs with Modern C2: AxScript and Adaptix
+
+While compiling a BOF is the first step, executing it efficiently requires integration with a Command and Control framework. Adaptix is a highly modular, open-source post-exploitation and adversarial emulation framework designed for authorized penetration testing. To extend its capabilities, Adaptix utilizes AxScript, a built-in scripting language based on the Qt JavaScript engine.
+
+AxScript is essential for Adaptix because it bridges the gap between high-level operator commands and low-level BOF execution. Instead of manually typing out long execution paths or architecture-specific file names, operators can use AxScript to create custom commands that automatically handle argument packing, architecture detection, and BOF routing. Here is an example of an AxScript designed to load and execute the Hello Beacon BOF we compiled earlier:
+
+```yaml
+var metadata = {
+    name: "HelloBOF",
+    description: "Runs Hello Beacon BOF",
+    store: true
+};
+
+var cmd_hello = ax.create_command("hello_bof", "Runs the Hello Beacon BOF", "hello_bof");
+
+cmd_hello.setPreHook(function (id, cmdline, parsed_json, ...parsed_lines) {
+    let bof_path = ax.script_dir() + "hellobof." + ax.arch(id) + ".o";
+    ax.execute_alias(id, cmdline, `execute bof ${bof_path}`, "Task: Hello BOF");
+});
+
+var group_hello = ax.create_commands_group("HelloBOF", [cmd_hello]);
+ax.register_commands_group(group_hello, ["beacon"], ["windows"], []);
+```
+
+The metadata object defines the script identity, providing a name and description that the Adaptix client uses to catalog and display the extension to the operator.
+The ax.create_command function initializes a new command named hello_bof. This is the exact command the operator will type into the Adaptix console to trigger the action.
+The setPreHook function is the core of the automation. Before the command is sent to the agent, this hook intercepts the execution. It dynamically constructs the correct file path by combining the script directory with the base name and the target agent architecture, retrieved via ax.arch(id). This ensures that if the agent is x64 or x86, the correct compiled object file is selected automatically. It then uses ax.execute_alias to silently translate the operator simple hello_bof command into the framework native execute bof command, appending the resolved file path.
+
+Finally, the script groups the command using ax.create_commands_group and registers it specifically for beacon agents running on Windows platforms. This ensures the command only appears in the operator interface when it is contextually relevant and supported by the target environment.
+
 ## Situational Awareness and the TrustedSec Repository
 
 The true power of BOFs is realized in community-driven repositories that provide ready-to-use, lightweight capabilities. Situational awareness is the critical post-exploitation phase where an operator gathers information about the system, users, processes, and network to determine the next logical steps.
 
-TrustedSec has been a pioneer in democratizing this capability through their open-source repositories. Their Situational Awareness BOF repository contains dozens of tools that replicate native command-line utilities, such as `whoami`, `tasklist`, `ipconfig`, `netstat`, `sc_enum`, and `ldapsearch`.
+TrustedSec has been a pioneer in democratizing this capability through their open-source repositories. Their Situational Awareness BOF repository contains dozens of tools that replicate native command-line utilities, such as `whoami`, `tasklist`, `ipconfig`, `netstat`, `sc_enum`, and `ldapsearch`. Check out the [TrustedSec BOF Repository](https://github.com/trustedsec/CS-Situational-Awareness-BOF) for more information.
 
 These tools execute through a COFF loader. This allows operators to gather rich telemetry about the environment, like enumerating filter drivers or querying Active Directory, without necessarily spawning a command shell or generating command-line logging associated with those utilities.
 
