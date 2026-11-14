@@ -3,7 +3,6 @@ title: "Introduction to Beacon Object Files: Internals and Weaponizing Your Firs
 date: 2026-11-14 20:00:00 +0530
 categories: ["MalDev"]
 tags: ["bof", "beacon-object-files", "cobalt-strike", "windows-internals", "red-teaming"]
-description: "An introduction to Beacon Object Files, COFF internals, argument parsing, and BOF development."
 ---
 
 ## The Pre-BOF Era in Red Teaming
@@ -104,7 +103,7 @@ While compiling a BOF is the first step, executing it efficiently requires integ
 
 AxScript is essential for Adaptix because it bridges the gap between high-level operator commands and low-level BOF execution. Instead of manually typing out long execution paths or architecture-specific file names, operators can use AxScript to create custom commands that automatically handle argument packing, architecture detection, and BOF routing. Here is an example of an AxScript designed to load and execute the Hello Beacon BOF we compiled earlier:
 
-```yaml
+```axs
 var metadata = {
     name: "HelloBOF",
     description: "Runs Hello Beacon BOF",
@@ -124,7 +123,10 @@ ax.register_commands_group(group_hello, ["beacon"], ["windows"], []);
 
 The metadata object defines the script identity, providing a name and description that the Adaptix client uses to catalog and display the extension to the operator.
 The ax.create_command function initializes a new command named hello_bof. This is the exact command the operator will type into the Adaptix console to trigger the action.
-The setPreHook function is the core of the automation. Before the command is sent to the agent, this hook intercepts the execution. It dynamically constructs the correct file path by combining the script directory with the base name and the target agent architecture, retrieved via ax.arch(id). This ensures that if the agent is x64 or x86, the correct compiled object file is selected automatically. It then uses ax.execute_alias to silently translate the operator simple hello_bof command into the framework native execute bof command, appending the resolved file path.
+
+The setPreHook function is the core of the automation. Before the command is sent to the agent, this hook intercepts the execution. It dynamically constructs the correct file path by combining the script directory with the base name and the target agent architecture, retrieved via ax.arch(id). 
+
+This ensures that if the agent is x64 or x86, the correct compiled object file is selected automatically. It then uses ax.execute_alias to silently translate the operator simple hello_bof command into the framework native execute bof command, appending the resolved file path.
 
 Finally, the script groups the command using ax.create_commands_group and registers it specifically for beacon agents running on Windows platforms. This ensures the command only appears in the operator interface when it is contextually relevant and supported by the target environment.
 
