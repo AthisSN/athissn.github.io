@@ -140,13 +140,13 @@ With the AxScript written and the BOF compiled, the final step is to integrate a
 
 Assuming a beacon session has already been established within your local lab environment, the next objective is to verify that the extension was loaded correctly. Within the Adaptix console, you can utilize the native help command to list all available commands for the active session. 
 
-![BOF Confirmation](https://github.com/AthisSN/athissn.github.io/tree/main/assets/posts/Hello-BOF-Confirmation.png)
+![BOF Confirmation](/assets/posts/Hello-BOF-Confirmation.png)
 
 Scrolling through the output, you will see the hello_bof command listed alongside its description, confirming that the script was successfully parsed and the command is now available for execution.
 
 With the command verified, you can now execute it by simply typing hello_bof into the console. The Adaptix client will intercept the command, trigger the pre-hook we defined earlier, dynamically resolve the correct architecture-specific object file, and pass the execution task to the beacon. If the compilation and scripting were performed correctly, the console will immediately display the output, successfully printing the Hello Beacon message directly from the agent process.
 
-![Execution](https://github.com/AthisSN/athissn.github.io/tree/main/assets/posts/BOF-Execution-Successful.png)
+![Script Manager](/assets/posts/BOF-Execution-Successful.png)
 
 This successful execution validates the entire pipeline, from writing the C code and compiling the COFF object file to scripting the automation layer and executing it in memory. While this serves as a highly simplistic and foundational example of a custom BOF, it demonstrates the core mechanics of in-memory execution. In the upcoming articles, we will deep dive into writing more complex and custom BOFs, exploring advanced situational awareness techniques, and detailing how to perform various offensive operations while maintaining a minimal footprint.
 
