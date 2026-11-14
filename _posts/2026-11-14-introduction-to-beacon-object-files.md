@@ -25,6 +25,8 @@ With the arrival of version 4.1, BOFs allowed operators to execute post-exploita
 
 By leveraging a lightweight, position-independent object file format, red teams could suddenly perform complex tasks with a fraction of the memory footprint and telemetry generation of traditional Portable Executable files. This paradigm shift moved the focus from running a standalone binary to executing a targeted, isolated function. 
 
+![BOF Confirmation](/assets/posts/prebof.png)
+
 This evolution drastically reduced the observable attack surface, forcing defenders to look deeper into process memory, API call patterns, and thread behavior rather than relying solely on process creation events, ultimately marking the beginning of a new era in stealthy, in-memory post-exploitation.
 
 ## Understanding BOFs and COFF Internals
@@ -52,13 +54,15 @@ Normally, a linker combines these object files and resolves all dependencies to 
 
 Windows APIs are the fundamental building blocks for interacting with the operating system. Take, for example, the CreateFileA API, which is used to create or open files, named pipes, or communication devices (as detailed in the official Microsoft documentation: https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea). In a standard C program, CreateFileA is called with multiple explicit parameters, including the file path, desired access, share mode, security attributes, creation disposition, and flags.
 
+![BOF Confirmation](/assets/posts/api.png)
+
 A BOF cannot rely on the standard C runtime or conventional `argc` and `argv` argument passing, as it is not a standalone executable with a `main` function. Instead, arguments are packed by the operator on the team server into a contiguous binary buffer.
 
 When the BOF is executed, its `go` function is invoked, receiving a pointer to this buffer and its total length. To parse this raw data, the BOF utilizes the Beacon Data Parser API.
 
 It first calls `BeaconDataParse` to initialize a parser state. From there, it sequentially extracts the arguments using specific extraction functions.
 
-For instance, to call `CreateFile`, the BOF would extract a string for the file path and an integer for the access mask from the parsed buffer, and then pass those resolved variables directly to the Windows API.
+For instance, to call `CreateFileA`, the BOF would extract a string for the file path and an integer for the access mask from the parsed buffer, and then pass those resolved variables directly to the Windows API.
 
 ## BOF Data Types and Parser Operations
 
