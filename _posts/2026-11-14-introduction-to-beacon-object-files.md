@@ -75,7 +75,7 @@ The corresponding BOF operations use the Data Parser API to read them back in th
 
 ## Getting the Hands Dirty: The Hello Beacon BOF
 
-Creating a basic BOF is straightforward and serves as an excellent foundational exercise. Below is a minimal C program designed to print a simple message to the operator console. It includes the `beacon.h` header, which declares the necessary internal APIs, and defines the mandatory `go` function.
+Below is a minimal C program designed to print a simple message to the operator console. It includes the `beacon.h` header, which declares the necessary internal APIs, and defines the mandatory `go` function. This header file is an absolutely critical component for the compilation process because a BOF operates outside the standard Windows execution environment and cannot rely on the default C runtime or standard Windows headers.
 
 ### Hello Beacon - C Source Code
 
